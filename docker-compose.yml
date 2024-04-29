@@ -1,0 +1,29 @@
+services:
+    web:
+        build:
+            context: docker/httpd
+            dockerfile: Dockerfile
+        ports:
+            - 8000:8000
+        depends_on:
+            - phpfpm
+            - db
+        volumes:
+            - ./public:/var/www/html
+        networks:
+            - adslbcnet
+
+    phpfpm:
+        build:
+            context: docker/php-fpm
+            dockerfile: Dockerfile
+        volumes:
+            - ./public:/var/www/html
+        expose:
+            - 9000
+        networks:
+            - adslbcnet
+
+networks:
+    adslbcnet:
+        driver: bridge
