@@ -7,7 +7,6 @@ services:
             - 8000:8000
         depends_on:
             - phpfpm
-            - db
         volumes:
             - ./public:/var/www/html
         networks:
